@@ -1,0 +1,204 @@
+# OPENUPSMODE [-] OpenUPS Mode
+#0-Auto restart when Input Power is Present=YES
+#1-Auto restart when Input Power is Present=NO
+
+OPENUPSMODE=0
+# CAPACITY [mAh] Battery Capacity.
+#Default 7000mAh
+
+CAPACITY=3500
+# CELLS [pcs] Number of configured cells to charge/balance
+#Default is 1.
+
+CELLS=1
+# MOB_ONOFF_TOUT [mS] The powerswitch on the motherboard(if connected) will be shorted  this period to turn the Motherboard ON or OFF
+#Default is 500ms
+
+MOB_ONOFF_TOUT=500
+# UPS_CONFIG [bits] Configuration register. Used for enabling disabling modules. LSB bit is b0.
+#b6- Stop impulse		b5- Start impulse
+#b4- Coulomb counter	b3- A/D Low pass Filter module
+#b2- Balance module		b1- Charge module
+#b0- Output module
+#Default is all enabled
+
+UPS_CONFIG=11111111
+# UPS_CONFIG2 [bits] Configuration register (Firmware V1.4+). Used for enabling disabling modules. LSB bit is b0.
+#bit0: if bit is set and running on battery and measured output power<POUT_LO than go to deep sleep
+
+UPS_CONFIG2=00000000
+# UPS_INIT_DELAY_TOUT [s] Initial delay before starting the UPS
+#Default is 1 sec.
+
+UPS_INIT_DELAY_TOUT=1
+# UPS_VIN_MAX_SHUTDOWN [V] Max allowed input voltage. In case input voltage exceeds predefined value shutdown will be initiated.
+#Default is 35V.
+
+UPS_VIN_MAX_SHUTDOWN=34.989151
+# UPS_VIN_MIN_START [V] If input voltage is above this threshold the UPS will start and take power from the input.
+#Default is 11V.
+
+UPS_VIN_MIN_START=10.989500
+# UPS_VIN_MIN_STOP [V] If input voltage is below this threshold the UPS will try to run on battery.
+#Default is 6V.
+
+UPS_VIN_MIN_STOP=20
+# UPS_VCELL_MIN_START [V] If Vin is not present and all the battery cells are above this threshold the UPS can start and runs on battery
+#Default is 11.7V.
+
+UPS_VCELL_MIN_START=11.698050
+# UPS_VCELL_MIN_STOP [V] If VIN is not present and one of the battery cells is less than this threshold during the time period specified by  UPS_VBAT_UVP_OFF_TOUT parameter the UPS will initiate shut down procedure.
+#Default is 11.4V.
+
+UPS_VCELL_MIN_STOP=11.398100
+# UPS_VBAT_UVP_OFF_TOUT [s] During this period battery cells are checked against UPS_VCELL_MIN_STOP. If cell voltage exceeds UPS_VCELL_MIN_STOP the timer is rearmed so it can filter unwanted noise in the system.
+#Default is 5 sec.
+
+UPS_VBAT_UVP_OFF_TOUT=5
+# UPS_HARDOFF_TOUT [s] After UPS_VBAT_UVP_OFF_TOUT passed motherboard is signaled to shut down. The UPS will wait this period so that the Motherboard can shut down gracefully, than cut power and enter deep sleep.This period should not be too long to prevent battery drain.
+#Default is 60 sec.
+
+UPS_HARDOFF_TOUT=60
+# UPS_VBAT_SLEEP_TOUT [HH:MM:SS] Deep sleep timeout (Firmware V1.4+).  If system is running on battery and this period has elapsed with no input power applied then the UPS will initiate shut down procedure.
+#"Never" is allowed as value (to disable this feature)
+
+UPS_VBAT_SLEEP_TOUT=Never
+# UPS_SWITCHOVER_VBAT_TOUT [ms] After UPS switches to battery, can switch back to Vin only after this time ellapses
+#Default is 1000 ms
+
+UPS_SWITCHOVER_VBAT_TOUT=1000
+# UPS_SWITCHOVER_VIN_TOUT [ms] After UPS switches to input, can switch back to battery only after this time ellapses
+#Default is 1 ms
+
+UPS_SWITCHOVER_VIN_TOUT=1
+# DCHG_IMAX [mA] Max allowed discharge current. In case discharge current exceeds this threshold shutdown will be initiated.
+#Default is 10000 mA.
+
+DCHG_IMAX=9990.059570
+# CHG_ICOND [mA] Conditioning/Precharge current. Charge current is limited to this value until cell voltage exceeds CHG_VCOND value and for at least CHG_TCOND time.
+#Default is 100mA.
+
+CHG_ICOND=99.288002
+# CHG_VCOND [V] Conditioning/Precharge voltage. Charge current is limited to CHG_ICOND until cell voltage exceeds this value and for at least CHG_TCOND time.
+#Default is 11.2V.
+
+CHG_VCOND=11.192420
+# CHG_TCOND [s] Conditioning/Precharge time. Charge current is limited to  CHG_ICOND value until cell voltage exceeds CHG_VCOND value and it is applied during this time.
+#Default is 30 sec.
+
+CHG_TCOND=30
+# CHG_IBULK [mA] Fast charge current limit (constant current mode)
+#Default is 1750mA.
+
+CHG_IBULK=496.440002
+# CHG_BULK_STOP_VOLTAGE [V/cell] Maximum allowed bulk charge voltage/cell during constant current/constant voltage charging
+#Default is 14.1V
+
+CHG_BULK_STOP_VOLTAGE=14.097650
+# CHG_HYSTERESIS [V/cell] An overvoltage value (CHG_BULK_STOP_VOLTAGE +CHG_HYSTERESIS ) that it is allowed when charging.If one of the cells exceeds this value charging is imediately stopped.
+#Default is 100mV/cell.
+
+CHG_HYSTERESIS=0.094270
+# CHG_IMIN [mA] If charge current in CV mode is less than this value
+#PbSO4: enter maintanence mode and apply the float charge voltage(CHG_START_VOLTAGE)
+#LiFePO4: cut off the charge voltage
+#Default is 290mA
+
+CHG_IMIN=285.453003
+# CHG_GLOBAL_TOUT [min] Global charge timeout (Firmware v1.3+)
+
+CHG_GLOBAL_TOUT=1260
+# CHG_IFLOAT [mA] Charge current limit in float charge mode for PbSO4 batteries (Firmware v1.3+)
+
+CHG_IFLOAT=99.288002
+# CHG_TOPPING_TIMER [s] For Lithium based batteries after an overvoltage condition is detected for a cell a resting period is set by this timer before applying a small topping charge in case other cells are still not charged.
+#Default is 1800 sec.
+
+CHG_TOPPING_TIMER=1800
+# CHG_START_VOLTAGE [V/cell] If cell voltage is below this value charging can be started. For SLA battery this also sets the floating charge voltage.
+#Default is 13.5V/cell
+
+CHG_START_VOLTAGE=13.497750
+# CHG_BAT_TYPE  The battery chemistry to be charged.
+#0- PbSO4 (float charge is applied)
+#1- LiFePO4 (float charge is not applied)
+#2- LiPO (float charge is not applied)
+#Other (float charge is not applied)
+#Default is 0.
+
+CHG_BAT_TYPE=0
+# CHG_TEMP_PCB [�C] Charge current is limited by CHG_ILIMIT_TEMP_PCB amount every 30s,if board temperature exceeds this value. Can limit the charge current till CHG_IBULK/4 value.
+#Default is 55�C.
+
+CHG_TEMP_PCB=60
+# CHG_TEMP_PCB_LOW [�C] Charge current is limited by CHG_ILIMIT_TEMP_PCB amount every 30s,if board temperature is lower than this value for SLA, turns off charging for LiIon and LiFePo4. Can limit the charge current till CHG_IBULK/4 value(Firmware V1.6+)
+#Default is 5�C.
+
+CHG_TEMP_PCB_LOW=125
+# CHG_ILIMIT_TEMP_PCB [mA] Limit charge current with this amount if board temperature exceeds CHG_TEMP_PCB.
+#Default is 50mA.
+
+CHG_ILIMIT_TEMP_PCB=49.644001
+# CHG_FREQUENCY [kHz] The working frequency of the charger buck-boost converter
+#Default is 333kHz.
+
+CHG_FREQUENCY=50
+# BAL_VCELL_MIN [V] Balancing is allowed  if cell voltages are above this value.
+#Default is 3V
+
+BAL_VCELL_MIN=3.093770
+# BAL_VCELL_DIFF_START [V] If the voltage difference between cells exceeds this value start balancing the cells.
+#Default is 70mV.
+
+BAL_VCELL_DIFF_START=0.068560
+# BAL_VCELL_DIFF_STOP [V] If the voltage difference between cells is less than this value stop balancing the cells.
+#Default is 40mV.
+
+BAL_VCELL_DIFF_STOP=0.034280
+# OUT_VOLTAGE [V] The output voltage.
+#Default is 12V.
+
+OUT_VOLTAGE=12.080000
+# OUT_FREQUENCY [kHz] The working frequency of the output buck-boost converter.
+#Default 300kHz
+
+OUT_FREQUENCY=39
+# OUT_MAX_REGULATOR_STEP [step] Maximum allowed regulation step number for output module (0-255)
+#Default 100.
+
+OUT_MAX_REGULATOR_STEP=100
+# POUT_LO [W] Output power low threshold for motherboard alive sensing.If output power is lower than this threshold shut down impulse is NOT sent to the motherboard.
+#Default is 2W.
+
+POUT_LO=0.30
+# POUT_HI [W] Output power high threshold for motherboard alive sensing. If output power is higher than this threshold shut down impulse is sent to the motherboard.
+#Default is 6W.
+
+POUT_HI=1.00
+# OCV_SOC0 [V] Open Circuit Voltage State Of Charge detection for initial 0% fuel gauge estimation.
+#Default is 11.8V
+
+OCV_SOC0=11.792320
+# OCV_SOC10 [V] Open Circuit Voltage State Of Charge detection for initial 10% fuel gauge estimation.
+#Default is 11.9V
+
+OCV_SOC10=11.895160
+# OCV_SOC25 [V] Open Circuit Voltage State Of Charge detection for initial 25% fuel gauge estimation.
+#Default is 12V
+
+OCV_SOC25=11.998000
+# OCV_SOC50 [V] Open Circuit Voltage State Of Charge detection for initial 50% fuel gauge estimation.
+#Default is 12.3V
+
+OCV_SOC50=12.297950
+# OCV_SOC75 [V] Open Circuit Voltage State Of Charge detection for initial 75% fuel gauge estimation.
+#Default is 12.6V
+
+OCV_SOC75=12.597900
+# OCV_SOC100 [V] Open Circuit Voltage State Of Charge detection for initial 100% fuel gauge estimation.
+#Default is 12.8V
+
+OCV_SOC100=12.795010
+# WRITE COUNT [count] Number of times the flash memory has been written. Parameter is Read only.
+
+WRITE COUNT=1
